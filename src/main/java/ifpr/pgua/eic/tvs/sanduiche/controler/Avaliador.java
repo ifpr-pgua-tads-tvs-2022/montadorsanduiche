@@ -26,14 +26,37 @@ public class Avaliador {
     public boolean avalia(Sanduiche sanduiche){
 
         int contPaes = 0;
+        int contQueijos = 0;
+        int contMolhos = 0;
 
         for(Item item:sanduiche.getItens()){
-            if(item.getTipo() == TipoItem.PAO){
+            /*if(item.getTipo() == TipoItem.PAO){
                 contPaes +=1;
+            }*/
+
+            switch(item.getTipo()){
+                case PAO:
+                     contPaes += 1;
+                break;
+                case QUEIJO:
+                    contQueijos += 1;
+                break;
+                case MOLHO:
+                    contMolhos +=1;
+                break;
             }
+
         }
 
         if(contPaes != 1){
+            return false;
+        }
+
+        if((contQueijos < 1) || (contQueijos > 3)){
+            return false;
+        }
+
+        if(contMolhos < 1){
             return false;
         }
 

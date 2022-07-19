@@ -20,21 +20,36 @@ public class SanduicheRepositorio {
 
 
     /**
-     * Recebe uma lista de itens, cria um sanduiche e insere na base de dados
+     * Recebe uma lista de itens, 
+     * cria um sanduiche,
+     * avalia se esta montado corretamente, 
+     * insere na base de dados
      * através do sanduicheDAO. 
      * 
      * 
      * @param itens lista de itens que compõem o sanduiche
      * @return sanduiche atualizado com o novo id
-     * @throws SanduicheException gera exceção caso a lista de itens seja vazia ou o sanduiche não esteja montado 
-     * corretamente.
+     * @throws SanduicheException gera exceção caso a lista de itens seja vazia 
+     *  ou o sanduiche não esteja montado corretamente.
      */
 
     public Sanduiche cadastrar(List<Item> itens) throws SanduicheException{
         
+        if(itens == null || itens.size()==0){
+            throw new SanduicheException("Lista Vazia!!");
+        }
+
+
         Sanduiche sanduiche = new Sanduiche(itens);
         
+        if(!avaliador.avalia(sanduiche)){
+            throw new SanduicheException("Problema com a avaliacao!");
+        }
+
         return sanduicheDAO.create(sanduiche);
+        
+
+        
     }
     
 

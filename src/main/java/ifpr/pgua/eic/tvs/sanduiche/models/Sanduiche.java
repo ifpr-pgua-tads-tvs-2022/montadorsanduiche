@@ -28,7 +28,7 @@ public class Sanduiche {
     public void calculaValor(){
         double valor = 0;
         for(Item item:itens){
-            valor = item.getValor();
+            valor += item.getValor();
         }
         this.valorFinal = valor;
     }
@@ -39,7 +39,7 @@ public class Sanduiche {
     public void calcularPeso(){
         double peso=0;
         for(Item item:itens){
-            peso = item.getPeso();
+            peso += item.getPeso();
         }
 
         this.pesoFinal = peso;
